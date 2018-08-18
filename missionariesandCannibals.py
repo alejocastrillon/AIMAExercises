@@ -16,7 +16,7 @@ class missionariesandCannibals(Problem):
         elif state == (3, 1, 0):
             return ['C']
         elif state == (3, 2, 1):
-            return ['CC', 'MC']
+            return ['CC']
         elif state == (3, 0, 0):
             return ['C', 'CC']
         elif state == (2, 1, 0):
