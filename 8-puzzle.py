@@ -38,7 +38,7 @@ class puzzle(Problem):
             return ['MA', 'MB', 'MI', 'MD']
 
     '''Convierte la matriz de tuplas en una lista de lista
-    para permitir su modificación'''
+    para permitir su modificacion'''
     def convertStateintoList(self, state):
         tList = []
         for x in state:
@@ -60,13 +60,13 @@ class puzzle(Problem):
             os.system('clear')
 
 
-    '''Dependiendo del estado y la acción se mueven los cuadros'''
+    '''Dependiendo del estado y la accion se mueven los cuadros'''
     def result(self, state, action):
         pos = self.positionWhite(state)
         t = self.convertStateintoList(state)
         '''print(pos)
         print(t)'''
-        self.messageProcessing()
+        #self.messageProcessing()
         if action == 'MA':
             p = t[pos[0] - 1][pos[1]]
             t[pos[0]][pos[1]] = p
@@ -105,8 +105,26 @@ def breadth_first_search(problem):
                 frontier.append(child)
     return None
 
+def depth_first_graph_search(problem):
+    """Search the deepest nodes in the search tree first.
+        Search through the successors of a problem to find a goal.
+        The argument frontier should be an empty queue.
+        Does not get trapped by loops.
+        If two paths reach a state, only use the first one. [Figure 3.7]"""
+    frontier = [(Node(problem.initial))]  # Stack
+    explored = set()
+    while frontier:
+        node = frontier.pop()
+        if problem.goal_test(node.state):
+            return node
+        explored.add(node.state)
+        frontier.extend(child for child in node.expand(problem)
+                        if child.state not in explored and
+                        child not in frontier)
+    return None
+
 '''Este ejemplo es sencillo, lo coloque porque es uno de los que toma menos tiempo de realizar'''
-initial = ((1, 2, 3), (4, 0, 6), (7, 5, 8))
+initial = ((4, 1, 2), (7, 0, 3), (8, 5, 6))
 goal = ((1, 2, 3), (4, 5, 6), (7, 8, 0))
 puz = puzzle(initial, goal)
 
