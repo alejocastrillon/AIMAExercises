@@ -1,4 +1,4 @@
-from simpleai.search import SearchProblem, astar
+from simpleai.search import SearchProblem, astar, breadth_first, depth_first
 import pygame
 
 INITIAL = ((4, 1, 2), (7, 0, 3), (8, 5, 6))
@@ -79,7 +79,7 @@ size = width, height = [800, 600]
 pygame.init()
 pantalla = pygame.display.set_mode(size)
 p = Puzzle()
-result = astar(Puzzle(INITIAL))
+result = breadth_first(Puzzle(INITIAL))
 resultado = result.path()
 print(resultado)
 done = False
