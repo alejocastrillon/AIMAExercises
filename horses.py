@@ -7,6 +7,7 @@ class Horses(Problem):
         Problem.__init__(self, initial, goal)
         self.state = initial
         self.numberHorse = 0
+        self.intents = 0
 
     '''Convierte la matriz de tuplas en una lista de lista
     para permitir su modificacion'''
@@ -148,9 +149,13 @@ class Horses(Problem):
                         return (i, j)
 
     def actions(self, state):
-        if self.numberHorse >= 4:
-            self.numberHorse = 0
-        self.numberHorse += 1
+        if self.intents == 2:
+            self.intents = 0
+            if self.numberHorse >= 4:
+                self.numberHorse = 0
+            self.numberHorse += 1
+        else:
+            self.intents += 1
         print(self.numberHorse)
         pos = self.coordHorsetoMove(state)
         print(pos)
